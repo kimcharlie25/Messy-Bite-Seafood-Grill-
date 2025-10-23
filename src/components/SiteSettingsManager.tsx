@@ -69,8 +69,10 @@ const SiteSettingsManager: React.FC = () => {
 
       setIsEditing(false);
       setLogoFile(null);
+      alert('Site settings updated successfully!');
     } catch (error) {
       console.error('Error saving site settings:', error);
+      alert('Failed to update site settings. Please try again.');
     }
   };
 

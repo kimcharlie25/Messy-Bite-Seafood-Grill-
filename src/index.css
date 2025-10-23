@@ -2,16 +2,272 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ramen Yard Custom Styles */
-/* Minimal helpers for ramen palette when needed outside tailwind tokens */
-.bg-ramen-cream { background-color: #FFF3E0; }
-.bg-ramen-beige { background-color: #F7E7CE; }
-.text-ramen-red { color: #D7263D; }
-.text-ramen-dark { color: #0B0A0A; }
-.border-ramen-sesame { border-color: #D1C7B7; }
-.ring-ramen-gold { --tw-ring-color: #E0A106; }
+/* ============================================
+   ELEGANT & SOPHISTICATED LUXURY THEME
+   Color Palette: #da2a1c (Red), #ffb800 (Yellow), Black, White
+   ============================================ */
 
-/* Hide scrollbar for mobile nav */
+/* Base Styles - Clean Foundation */
+@layer base {
+  body {
+    @apply font-sans text-black bg-white antialiased;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* ============================================
+   PREMIUM TYPOGRAPHY
+   ============================================ */
+
+.elegant-heading {
+  @apply font-serif font-semibold text-black tracking-luxury;
+  line-height: 1.2;
+}
+
+.elegant-subheading {
+  @apply font-serif font-medium text-black tracking-wide;
+  line-height: 1.3;
+}
+
+.elegant-body {
+  @apply font-sans font-normal text-gray-700;
+  line-height: 1.7;
+}
+
+.elegant-label {
+  @apply font-sans font-medium text-black tracking-wide uppercase text-xs;
+  letter-spacing: 0.15em;
+}
+
+/* ============================================
+   LUXURY BUTTONS & INTERACTIONS
+   ============================================ */
+
+.btn-primary {
+  @apply font-sans font-medium text-sm tracking-wide uppercase;
+  @apply bg-mb-red text-white px-8 py-3;
+  @apply border border-mb-red;
+  @apply transition-all duration-300 ease-out;
+  @apply hover:bg-mb-red-dark hover:border-mb-red-dark;
+  @apply hover:shadow-lg;
+  letter-spacing: 0.1em;
+}
+
+.btn-secondary {
+  @apply font-sans font-medium text-sm tracking-wide uppercase;
+  @apply bg-white text-black px-8 py-3;
+  @apply border border-black;
+  @apply transition-all duration-300 ease-out;
+  @apply hover:bg-black hover:text-white;
+  letter-spacing: 0.1em;
+}
+
+.btn-subtle {
+  @apply font-sans font-medium text-sm tracking-wide;
+  @apply bg-transparent text-black px-6 py-2;
+  @apply border border-gray-300;
+  @apply transition-all duration-300 ease-out;
+  @apply hover:border-black;
+}
+
+/* ============================================
+   ELEGANT CARDS & CONTAINERS
+   ============================================ */
+
+.luxury-card {
+  @apply bg-white border border-gray-200;
+  @apply transition-all duration-500 ease-out;
+  @apply hover:border-gray-300 hover:shadow-xl;
+}
+
+.luxury-card-elevated {
+  @apply bg-white shadow-sm;
+  @apply transition-all duration-500 ease-out;
+  @apply hover:shadow-2xl;
+}
+
+.premium-divider {
+  @apply border-t border-gray-200;
+}
+
+.premium-divider-bold {
+  @apply border-t-2 border-black;
+}
+
+/* ============================================
+   SOPHISTICATED ACCENTS
+   ============================================ */
+
+.accent-red {
+  @apply text-mb-red;
+}
+
+.accent-yellow {
+  @apply text-mb-yellow;
+}
+
+.badge-elegant {
+  @apply inline-block font-sans font-medium text-xs tracking-wide uppercase;
+  @apply px-3 py-1 bg-black text-white;
+  letter-spacing: 0.12em;
+}
+
+.badge-sale {
+  @apply inline-block font-sans font-semibold text-xs tracking-wide uppercase;
+  @apply px-3 py-1 bg-mb-red text-white;
+  letter-spacing: 0.12em;
+}
+
+.badge-popular {
+  @apply inline-block font-sans font-medium text-xs tracking-wide uppercase;
+  @apply px-3 py-1 border border-mb-yellow text-black bg-mb-yellow/10;
+  letter-spacing: 0.12em;
+}
+
+/* ============================================
+   REFINED SPACING & LAYOUT
+   ============================================ */
+
+.luxury-spacing {
+  @apply py-16 px-4 md:px-8 lg:px-12;
+}
+
+.luxury-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.elegant-section {
+  @apply bg-white py-20;
+}
+
+.elegant-section-alt {
+  @apply bg-gray-50 py-20;
+}
+
+/* ============================================
+   PREMIUM INTERACTIONS
+   ============================================ */
+
+.elegant-hover-lift {
+  @apply transition-all duration-300 ease-out;
+  @apply hover:-translate-y-1 hover:shadow-xl;
+}
+
+.elegant-hover-scale {
+  @apply transition-transform duration-500 ease-out;
+  @apply hover:scale-[1.02];
+}
+
+.subtle-fade {
+  @apply transition-opacity duration-300 ease-out;
+  @apply hover:opacity-80;
+}
+
+/* ============================================
+   ELEGANT FORM ELEMENTS
+   ============================================ */
+
+.elegant-input {
+  @apply font-sans text-sm;
+  @apply w-full px-4 py-3 bg-white border border-gray-300;
+  @apply focus:outline-none focus:border-black focus:ring-1 focus:ring-black;
+  @apply transition-all duration-300;
+}
+
+.elegant-select {
+  @apply font-sans text-sm;
+  @apply w-full px-4 py-3 bg-white border border-gray-300;
+  @apply focus:outline-none focus:border-black focus:ring-1 focus:ring-black;
+  @apply transition-all duration-300;
+}
+
+/* ============================================
+   SOPHISTICATED BORDERS & SHADOWS
+   ============================================ */
+
+.elegant-border {
+  @apply border border-gray-200;
+}
+
+.elegant-border-bold {
+  @apply border-2 border-black;
+}
+
+.elegant-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.elegant-shadow-lg {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.elegant-shadow-xl {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   PREMIUM PRICE DISPLAY
+   ============================================ */
+
+.price-elegant {
+  @apply font-serif font-medium text-black;
+}
+
+.price-accent {
+  @apply font-serif font-semibold text-mb-red;
+}
+
+.price-crossed {
+  @apply font-sans font-normal text-gray-400 line-through;
+}
+
+/* ============================================
+   ELEGANT ANIMATIONS
+   ============================================ */
+
+@keyframes elegantFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-elegant-fade-in {
+  animation: elegantFadeIn 0.6s ease-out;
+}
+
+/* ============================================
+   REFINED SCROLLBAR (Chrome, Safari, Edge)
+   ============================================ */
+
+.elegant-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.elegant-scrollbar::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.elegant-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+  border-radius: 4px;
+}
+
+.elegant-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Hide scrollbar but keep functionality */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -21,18 +277,55 @@
   display: none;
 }
 
-/* Image loading optimization */
-img {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+/* ============================================
+   LUXURY IMAGE STYLING
+   ============================================ */
+
+.elegant-image {
+  @apply w-full h-full object-cover;
 }
 
-/* Preload critical images */
-.preload-image {
-  content: '';
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  width: 1px;
-  height: 1px;
+.elegant-image-container {
+  @apply relative overflow-hidden bg-gray-100;
+}
+
+.elegant-image-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0;
+  @apply transition-opacity duration-500;
+}
+
+.elegant-image-container:hover .elegant-image-overlay {
+  @apply opacity-100;
+}
+
+/* ============================================
+   PREMIUM GRID LAYOUTS
+   ============================================ */
+
+.luxury-grid {
+  @apply grid gap-8 md:gap-12;
+}
+
+.luxury-grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12;
+}
+
+.luxury-grid-3 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8;
+}
+
+.luxury-grid-4 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+/* ============================================
+   ELEGANT TEXT UTILITIES
+   ============================================ */
+
+.text-balance {
+  max-width: 65ch;
+}
+
+.text-pretty {
+  line-height: 1.6;
 }

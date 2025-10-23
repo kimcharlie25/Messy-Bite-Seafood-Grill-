@@ -10,38 +10,39 @@ const SubNav: React.FC<SubNavProps> = ({ selectedCategory, onCategoryClick }) =>
   const { categories, loading } = useCategories();
 
   return (
-    <div className="sticky top-16 z-40 bg-white/90 backdrop-blur-md border-b border-ramen-sesame">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-4 overflow-x-auto py-3 scrollbar-hide">
+    <div className="sticky top-24 z-40 bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex items-center gap-3 overflow-x-auto py-6 scrollbar-hide elegant-scrollbar">
           {loading ? (
-            <div className="flex space-x-4">
+            <div className="flex gap-3">
               {[1,2,3,4,5].map(i => (
-                <div key={i} className="h-8 w-20 bg-gray-200 rounded animate-pulse" />
+                <div key={i} className="h-10 w-28 bg-gray-100 rounded animate-pulse" />
               ))}
             </div>
           ) : (
             <>
               <button
                 onClick={() => onCategoryClick('all')}
-                className={`px-3 py-1.5 rounded-full text-sm transition-colors duration-200 border ${
+                className={`px-6 py-2.5 text-xs font-sans font-medium tracking-wide uppercase transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
                   selectedCategory === 'all'
-                    ? 'bg-ramen-red text-white border-ramen-red'
-                    : 'bg-white text-gray-700 border-gray-300 hover:border-ramen-red'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black border border-gray-300 hover:border-black'
                 }`}
               >
-                All
+                <span className="text-base">🍽️</span>
+                <span>All Items</span>
               </button>
               {categories.map((c) => (
                 <button
                   key={c.id}
                   onClick={() => onCategoryClick(c.id)}
-                  className={`px-3 py-1.5 rounded-full text-sm transition-colors duration-200 border flex items-center space-x-1 ${
+                  className={`px-6 py-2.5 text-xs font-sans font-medium tracking-wide uppercase transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${
                     selectedCategory === c.id
-                      ? 'bg-ramen-red text-white border-ramen-red'
-                      : 'bg-white text-gray-700 border-gray-300 hover:border-ramen-red'
+                      ? 'bg-black text-white'
+                      : 'bg-white text-black border border-gray-300 hover:border-black'
                   }`}
                 >
-                  <span>{c.icon}</span>
+                  <span className="text-base">{c.icon}</span>
                   <span>{c.name}</span>
                 </button>
               ))}

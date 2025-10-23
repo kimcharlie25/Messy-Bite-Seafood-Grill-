@@ -4,27 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        ramen: {
-          red: '#D7263D',
-          dark: '#0B0A0A',
-          charcoal: '#111113',
-          cream: '#FFF3E0',
-          beige: '#F7E7CE',
-          gold: '#E0A106',
-          sesame: '#D1C7B7',
-          seaweed: '#1F2937',
-          kimchi: '#B81D24'
+        mb: {
+          red: '#da2a1c',
+          yellow: '#ffb800',
+          black: '#000000',
+          white: '#ffffff',
+          charcoal: '#1a1a1a',
+          'red-dark': '#b82217',
+          'red-light': '#ff4433',
+          'yellow-light': '#ffd700',
+          'yellow-dark': '#e6a600'
         }
       },
       fontFamily: {
-        'pretendard': ['Pretendard', 'system-ui', 'sans-serif'],
-        'noto-kr': ['Noto Serif KR', 'serif']
+        'serif': ['Playfair Display', 'Cormorant Garamond', 'Georgia', 'serif'],
+        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'display': ['Cormorant Garamond', 'Playfair Display', 'serif']
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.4s ease-out',
-        'bounce-gentle': 'bounceGentle 0.6s ease-out',
-        'scale-in': 'scaleIn 0.3s ease-out'
+        'fade-in': 'fadeIn 0.6s ease-in-out',
+        'slide-up': 'slideUp 0.5s ease-out',
+        'elegant-scale': 'elegantScale 0.4s ease-out',
+        'subtle-glow': 'subtleGlow 3s ease-in-out infinite'
       },
       keyframes: {
         fadeIn: {
@@ -32,18 +33,21 @@ export default {
           '100%': { opacity: '1' }
         },
         slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '0%': { transform: 'translateY(30px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' }
         },
-        bounceGentle: {
-          '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
-          '40%': { transform: 'translateY(-4px)' },
-          '60%': { transform: 'translateY(-2px)' }
-        },
-        scaleIn: {
-          '0%': { transform: 'scale(0.95)', opacity: '0' },
+        elegantScale: {
+          '0%': { transform: 'scale(0.98)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' }
+        },
+        subtleGlow: {
+          '0%, 100%': { boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)' },
+          '50%': { boxShadow: '0 4px 24px rgba(218, 42, 28, 0.08)' }
         }
+      },
+      letterSpacing: {
+        'luxury': '0.05em',
+        'wide': '0.1em'
       }
     },
   },

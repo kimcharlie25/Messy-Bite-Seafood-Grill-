@@ -33,23 +33,29 @@ export const useCart = () => {
     }, [] as (AddOn & { quantity: number })[]);
     
     setCartItems(prev => {
+      // Create a unique identifier for this specific combination
+      const variationId = variation?.id || 'none';
+      const addOnsId = groupedAddOns?.map(a => `${a.id}-${a.quantity}`).sort().join(',') || 'none';
+      const uniqueId = `${item.id}-${variationId}-${addOnsId}`;
+      
+      // Find existing item with the same unique combination
       const existingItem = prev.find(cartItem => 
-        cartItem.id === item.id && 
-        cartItem.selectedVariation?.id === variation?.id &&
-        JSON.stringify(cartItem.selectedAddOns?.map(a => `${a.id}-${a.quantity || 1}`).sort()) === JSON.stringify(groupedAddOns?.map(a => `${a.id}-${a.quantity}`).sort())
+        cartItem.id === uniqueId
       );
       
       if (existingItem) {
+        // Update quantity of existing item
         return prev.map(cartItem =>
-          cartItem === existingItem
+          cartItem.id === uniqueId
             ? { ...cartItem, quantity: cartItem.quantity + quantity }
             : cartItem
         );
       } else {
-        const uniqueId = `${item.id}-${variation?.id || 'default'}-${addOns?.map(a => a.id).join(',') || 'none'}`;
+        // Create new cart item
         return [...prev, { 
           ...item,
           id: uniqueId,
+          originalId: item.id, // Keep reference to original item ID
           quantity,
           selectedVariation: variation,
           selectedAddOns: groupedAddOns || [],

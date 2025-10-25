@@ -136,14 +136,20 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems, updateQuan
             
             <div className="space-y-6">
               {categoryItems.map((item) => {
-                const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
+                // Find cart items that match this base item (without variations/add-ons)
+                const baseCartItem = cartItems.find(cartItem => 
+                  cartItem.originalId === item.id && 
+                  !cartItem.selectedVariation && 
+                  (!cartItem.selectedAddOns || cartItem.selectedAddOns.length === 0)
+                );
                 return (
                   <MenuItemCard
                     key={item.id}
                     item={item}
                     onAddToCart={addToCart}
-                    quantity={cartItem?.quantity || 0}
+                    quantity={baseCartItem?.quantity || 0}
                     onUpdateQuantity={updateQuantity}
+                    cartItemId={baseCartItem?.id}
                   />
                 );
               })}

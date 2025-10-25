@@ -38,6 +38,7 @@ export interface CartItem extends MenuItem {
   selectedVariation?: Variation;
   selectedAddOns?: AddOn[];
   totalPrice: number;
+  originalId?: string; // Reference to the original menu item ID
 }
 
 export interface OrderData {

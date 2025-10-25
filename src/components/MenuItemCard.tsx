@@ -7,13 +7,15 @@ interface MenuItemCardProps {
   onAddToCart: (item: MenuItem, quantity?: number, variation?: Variation, addOns?: AddOn[]) => void;
   quantity: number;
   onUpdateQuantity: (id: string, quantity: number) => void;
+  cartItemId?: string;
 }
 
 const MenuItemCard: React.FC<MenuItemCardProps> = ({ 
   item, 
   onAddToCart, 
   quantity, 
-  onUpdateQuantity 
+  onUpdateQuantity,
+  cartItemId
 }) => {
   const [showCustomization, setShowCustomization] = useState(false);
   const [selectedVariation, setSelectedVariation] = useState<Variation | undefined>(
@@ -52,12 +54,17 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
   };
 
   const handleIncrement = () => {
-    onUpdateQuantity(item.id, quantity + 1);
+    if (cartItemId) {
+      onUpdateQuantity(cartItemId, quantity + 1);
+    } else {
+      // If no cart item exists, add to cart
+      onAddToCart(item, 1);
+    }
   };
 
   const handleDecrement = () => {
-    if (quantity > 0) {
-      onUpdateQuantity(item.id, quantity - 1);
+    if (quantity > 0 && cartItemId) {
+      onUpdateQuantity(cartItemId, quantity - 1);
     }
   };
 

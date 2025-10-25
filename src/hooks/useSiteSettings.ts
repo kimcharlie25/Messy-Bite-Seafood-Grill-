@@ -25,9 +25,44 @@ export const useSiteSettings = () => {
         site_logo: data.find(s => s.id === 'site_logo')?.value || '',
         site_description: data.find(s => s.id === 'site_description')?.value || '',
         currency: data.find(s => s.id === 'currency')?.value || 'PHP',
-        currency_code: data.find(s => s.id === 'currency_code')?.value || 'PHP'
+        currency_code: data.find(s => s.id === 'currency_code')?.value || 'PHP',
+        menu_heading: data.find(s => s.id === 'menu_heading')?.value || 'Our Menu',
+        menu_description: data.find(s => s.id === 'menu_description')?.value || 'Messy Bite is a family-owned and a proud Cebuano homegrown restaurant.',
+        menu_banner_image: data.find(s => s.id === 'menu_banner_image')?.value || ''
       };
 
+      // If menu settings don't exist in database, create them
+      if (!data.find(s => s.id === 'menu_heading')) {
+        console.log('Creating menu settings in database...');
+        try {
+          await supabase
+            .from('site_settings')
+            .insert([
+              { id: 'menu_heading', value: 'Our Menu', type: 'text', description: 'The main heading displayed on the menu page' },
+              { id: 'menu_description', value: 'Messy Bite is a family-owned and a proud Cebuano homegrown restaurant.', type: 'text', description: 'The description text displayed below the menu heading' },
+              { id: 'menu_banner_image', value: '', type: 'image', description: 'Banner image displayed at the top of the menu page' }
+            ]);
+          console.log('Menu settings created successfully');
+        } catch (insertError) {
+          console.error('Error creating menu settings:', insertError);
+        }
+      }
+
+      // Check if menu_banner_image setting exists, create it if not
+      if (!data.find(s => s.id === 'menu_banner_image')) {
+        console.log('Creating menu_banner_image setting...');
+        try {
+          await supabase
+            .from('site_settings')
+            .insert([
+              { id: 'menu_banner_image', value: '', type: 'image', description: 'Banner image displayed at the top of the menu page' }
+            ]);
+          console.log('menu_banner_image setting created successfully');
+        } catch (insertError) {
+          console.error('Error creating menu_banner_image setting:', insertError);
+        }
+      }
+      
       setSiteSettings(settings);
     } catch (err) {
       console.error('Error fetching site settings:', err);
@@ -60,13 +95,15 @@ export const useSiteSettings = () => {
   const updateSiteSettings = async (updates: Partial<SiteSettings>) => {
     try {
       setError(null);
+      console.log('updateSiteSettings called with:', updates);
 
-      const updatePromises = Object.entries(updates).map(([key, value]) =>
-        supabase
+      const updatePromises = Object.entries(updates).map(([key, value]) => {
+        console.log(`Updating ${key} with value:`, value);
+        return supabase
           .from('site_settings')
           .update({ value })
-          .eq('id', key)
-      );
+          .eq('id', key);
+      });
 
       const results = await Promise.all(updatePromises);
       

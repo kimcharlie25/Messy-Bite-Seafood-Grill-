@@ -329,3 +329,22 @@
 .text-pretty {
   line-height: 1.6;
 }
+
+/* ============================================
+   RESPONSIVE BANNER IMAGE
+   ============================================ */
+
+.banner-image {
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
+}
+
+/* Fallback for browsers that don't support aspect-ratio */
+@supports not (aspect-ratio: 3 / 1) {
+  .banner-image {
+    height: 33.333vw; /* 3:1 aspect ratio fallback */
+    max-height: 400px;
+    min-height: 200px;
+  }
+}

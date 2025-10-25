@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuItem, CartItem } from '../types';
 import { useCategories } from '../hooks/useCategories';
+import { useSiteSettings } from '../hooks/useSiteSettings';
 import MenuItemCard from './MenuItemCard';
 import MobileNav from './MobileNav';
 
@@ -23,6 +24,7 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems, updateQuantity }) => {
   const { categories } = useCategories();
+  const { siteSettings, loading: settingsLoading } = useSiteSettings();
   const [activeCategory, setActiveCategory] = React.useState('hot-coffee');
 
   // Preload images when menu items change
@@ -92,12 +94,33 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems, updateQuan
         onCategoryClick={handleCategoryClick}
       />
       <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20">
-      <div className="text-center mb-20">
-        <h2 className="text-5xl font-serif font-semibold text-black mb-6 tracking-luxury">Our Menu</h2>
-        <p className="text-lg font-sans text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        Messy Bite is a family-owned and a proud Cebuano homegrown restaurant.
-        </p>
-      </div>
+        {/* Menu Banner Image */}
+        {!settingsLoading && siteSettings?.menu_banner_image && (
+          <div className="mb-16">
+            <div className="relative w-full rounded-xl overflow-hidden shadow-lg">
+              <img
+                src={siteSettings.menu_banner_image}
+                alt="Menu Banner"
+                className="banner-image"
+                loading="lazy"
+                onError={(e) => {
+                  console.error('Failed to load banner image:', siteSettings.menu_banner_image);
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+          </div>
+        )}
+
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-serif font-semibold text-black mb-6 tracking-luxury">
+            {settingsLoading ? 'Loading...' : (siteSettings?.menu_heading || 'Our Menu')}
+          </h2>
+          <p className="text-lg font-sans text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            {settingsLoading ? 'Loading menu description...' : (siteSettings?.menu_description || 'Messy Bite is a family-owned and a proud Cebuano homegrown restaurant.')}
+          </p>
+        </div>
 
       {categories.map((category) => {
         const categoryItems = menuItems.filter(item => item.category === category.id);
@@ -111,7 +134,7 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems, updateQuan
               <h3 className="text-3xl font-serif font-semibold text-black tracking-luxury">{category.name}</h3>
             </div>
             
-            <div className="luxury-grid-3">
+            <div className="space-y-6">
               {categoryItems.map((item) => {
                 const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
                 return (

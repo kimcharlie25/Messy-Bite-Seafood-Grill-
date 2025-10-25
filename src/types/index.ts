@@ -74,4 +74,7 @@ export interface SiteSettings {
   site_description: string;
   currency: string;
   currency_code: string;
+  menu_heading: string;
+  menu_description: string;
+  menu_banner_image: string;
 }
